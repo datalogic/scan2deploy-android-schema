@@ -151,17 +151,28 @@
           "$id": "#/properties/global/properties/script",
           "type": [ "string", "array" ],
           "title": "Script Schema",
-          "description": "A string specifying the absolute/relative path of a file, or a JSON array of strings describing the file content line-by-line. The script file will be interpreted last in staging process.",
-          "items": {
+          "description": "A script will be interpreted last in staging process. Provide either a string specifying the absolute/relative path of a file, or a JSON array of strings describing the file content line-by-line. \nDELETE <path> <pattern> <include>: Recursively deletes files/folders starting from path, only if the name matches the pattern regular-expression. If include is true the matching entries will be deleted, the non-matching otherwise. If folder path is empty at the end of the process it will be deleted, as well.\nDISABLE_APP <package-name>: Disables the app with the specified `package-name`. There is no longer any way an user could launch the app.\nENABLE_APP <package-name>: Enable the app with the specified `package-name`. The app becomes user-launchable.\nGRANT [-p permission] [-s grant|deny|default] <package-name>: Grants or revokes permissions on the specified package. The `-p` and `-s` parameters are optional.\n* `[-p]` If a permission is provided using the `-p` parameter, only that single permission will be affected. If no `-p` is specified, all the permissions declared in the manifest for the given `package-name` package will be affected.\n* `[-s]` The `-s` paramter can be used to specify that the permission be granted (`grant`), denied (`deny`), or user-configurable (`default`). In the caes of `grant` and `deny`, the permission set is no longer user-configurable; if you view the permission in the Settings app on the device, you will see that it can't be modified. The default behavior is to `grant` permission(s).\nINFLATE <archive-path> <target-path>: Inflates the ZIP archive found at archive-path to target-path folder.\nINSTALL <apk-path>: Installs an application given the path to the containing APK.\nLAUNCH <package-name>: Starts the launching intent given an application package-name. \nSHELL <command-with-arguments>: Runs an arbitrary shell command, similarly to the ADB shell command.\nUNINSTALL <package-name>: Uninstalls a previously installed application given its package-name.\nUPDATE <ota-path> <reset-type> <force-update>: Installs a firmware update from an OTA package.\nWAIT <milliseconds>: Suspend the script execution for milliseconds milliseconds.",
+	  "items": {
             "$id": "#/properties/global/properties/script/items",
             "type": "string",
             "title": "Items Schema",
-            "default": "",
+            "pattern": "^DELETE|^DISABLE_APP|^ENABLE_APP|^GRANT|^INFLATE|^INSTALL|^LAUNCH|^SHELL|^UNINSTALL|^UPDATE|^WAIT|^\\[Pre-Install\\]$|^\\[Install\\]$|^\\[Post-Install\\]$",
+            "default": "DELETE <path> <pattern> <include>",
             "examples": [
+              "DELETE <path> <pattern> <include>",
+              "DISABLE_APP <package-name>",
+              "ENABLE_APP <package-name>",
+              "GRANT [-p permission] [-s grant|deny|default] <package-name>",
+              "INFLATE <archive-path> <target-path>",
+              "INSTALL <apk-path>",
+              "LAUNCH <package-name>",
+              "SHELL <command-with-arguments>",
+              "UNINSTALL <package-name>",
+              "UPDATE <ota-path> <reset-type> <force-update>",
+              "WAIT <milliseconds>",
+              "[Pre-Install]",
               "[Install]",
-              "INSTALL /sdcard/Download/fa.apk",
-              "[Post-Install]",
-              "SHELL am start -a android.intent.action.MAIN -n com.example.mchew.fakeapp/.MainActivity"
+              "[Post-Install]"
             ]
           },
           "default": "",
@@ -565,7 +576,7 @@
           "type": "boolean",
           "title": "Ephemeral Schema",
           "description": "If true, wireless connection profile will be used during staging process, then deleted after staging. If false, wireless connection profile will still be present after staging process.",
-          "default": true,
+          "default": false,
           "examples": [
             false
           ]
