@@ -1,6 +1,6 @@
 # scan2deploy-android-schema
 
-This repo stores the JSON schema used by [Scan2Deploy Android](https://github.com/datalogic/scan2deploy-android). The latest "stable" version of the schema is also available at [schemastore.org](http://json.schemastore.org/datalogic-scan2deploy-android). 
+This repo stores the JSON schema used by [Scan2Deploy Android](https://github.com/datalogic/scan2deploy-android). The latest "stable" version of the schema is also available at [schemastore.org](http://json.schemastore.org/datalogic-scan2deploy-android).
 
 ## Schema Versioning
 
@@ -124,10 +124,14 @@ The `padlock` section is used to configure the staging locking feature. The avai
   **UPDATE**
 
   ```bash
-  UPDATE <ota-path> <reset-type> <force-update>
+  UPDATE <ota-path> [none|factory|enterprise] [none|true]
   ```
 
-  Installs a firmware update from an OTA package.
+  Installs a firmware update from an OTA package that has already been extracted to the device. There are 2 optional parameters:
+
+  1. Reset type to be performed after update. Valid values are `none`, `factory`, and `enterprise`.
+
+  2. Determines in an update should be "forced" or not. Valid values are `none` and `true`.
 
   **WAIT**
 
