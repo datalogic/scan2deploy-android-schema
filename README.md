@@ -49,10 +49,14 @@ The `padlock` section is used to configure the staging locking feature. The avai
   **DELETE**
 
   ```bash
-  DELETE <path> <pattern> <include>
+  DELETE <path> [pattern] [include]
   ```
 
-  Recursively deletes files/folders starting from `path`, only if the name matches the `pattern` regular-expression. If `include` is `true` the matching entries will be deleted, the non-matching otherwise. If folder `path` is empty at the end of the process it will be deleted, as well.
+  Recursively deletes files/folders starting from `path`, only if the name matches the `pattern` regular-expression. If folder `path` is empty at the end of the process it will be deleted, as well.
+  
+  * `pattern` - Optional regular expression to match. Often, this would just be the name of the file to be deleted. Default value: `"^.+$"` (i.e. delete all files with names one or more characters long).
+
+  * `include` - Optional value. If `include` is `true`, the matching entries will be deleted. If `include` is false, the non-matching entries will be deleted. Default value: `true`.
 
   **DISABLE_APP**
 
