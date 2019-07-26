@@ -1,4 +1,4 @@
-# scan2deploy-android-schema
+# Scan2Deploy Android Schema
 
 This repo stores the JSON schema used by [Scan2Deploy Android](https://github.com/datalogic/scan2deploy-android). The latest "stable" version of the schema is also available at [schemastore.org](http://json.schemastore.org/datalogic-scan2deploy-android).
 
@@ -112,10 +112,10 @@ The `padlock` section is used to configure the staging locking feature. The avai
   **SHELL**
 
   ```bash
-  SHELL <command-with-arguments>
+  SHELL am [broadcast|start]
   ```
 
-  Runs an arbitrary shell command, similarly to the `ADB shell` command.
+  Runs a small subset of commands available over `adb`. Currently, this includes the `am` subcommands `broadcast` and `start`. The official adb documentation for `am` commands is [available here](https://developer.android.com/studio/command-line/adb#am).
 
   **UNINSTALL**
 
