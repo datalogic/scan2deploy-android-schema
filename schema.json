@@ -149,10 +149,13 @@
         },
         "script": {
           "$id": "#/properties/global/properties/script",
-          "type": [ "string", "array" ],
+          "type": [
+            "string",
+            "array"
+          ],
           "title": "Script Schema",
           "description": "A script will be interpreted last in staging process. Provide either a string specifying the absolute/relative path of a file, or a JSON array of strings describing the file content line-by-line. \nDELETE <path> <pattern> <include>: Recursively deletes files/folders starting from path, only if the name matches the pattern regular-expression. If include is true the matching entries will be deleted, the non-matching otherwise. If folder path is empty at the end of the process it will be deleted, as well.\nDISABLE_APP <package-name>: Disables the app with the specified `package-name`. There is no longer any way an user could launch the app.\nENABLE_APP <package-name>: Enable the app with the specified `package-name`. The app becomes user-launchable.\nGRANT [-p permission] [-s grant|deny|default] <package-name>: Grants or revokes permissions on the specified package. The `-p` and `-s` parameters are optional.\n* `[-p]` If a permission is provided using the `-p` parameter, only that single permission will be affected. If no `-p` is specified, all the permissions declared in the manifest for the given `package-name` package will be affected.\n* `[-s]` The `-s` paramter can be used to specify that the permission be granted (`grant`), denied (`deny`), or user-configurable (`default`). In the caes of `grant` and `deny`, the permission set is no longer user-configurable; if you view the permission in the Settings app on the device, you will see that it can't be modified. The default behavior is to `grant` permission(s).\nINFLATE <archive-path> <target-path>: Inflates the ZIP archive found at archive-path to target-path folder.\nINSTALL <apk-path>: Installs an application given the path to the containing APK.\nLAUNCH <package-name>: Starts the launching intent given an application package-name. \nSHELL <command-with-arguments>: Runs an arbitrary shell command, similarly to the ADB shell command.\nUNINSTALL <package-name>: Uninstalls a previously installed application given its package-name.\nUPDATE <ota-path> <reset-type> <force-update>: Installs a firmware update from an OTA package.\nWAIT <milliseconds>: Suspend the script execution for milliseconds milliseconds.",
-	  "items": {
+          "items": {
             "$id": "#/properties/global/properties/script/items",
             "type": "string",
             "title": "Items Schema",
@@ -244,6 +247,24 @@
           "examples": [
             false
           ]
+        },
+        "select-time-zone": {
+          "$id": "#/properties/settings/properties/select-time-zone",
+          "type": "string",
+          "enum": [
+            "Pacific Time",
+            "CEST"
+          ],
+          "title": "Select-Time-Zone Schema",
+          "description": "Specify the device time zone manually",
+          "default": "CEST"
+        },
+        "time-24-format": {
+          "$id": "#/properties/settings/properties/time-format",
+          "type": "boolean",
+          "title": "Time-24-Format Schema",
+          "description": "Force time to display in 24-hour format",
+          "default": false
         },
         "auto-time-server": {
           "$id": "#/properties/settings/properties/auto-time-server",
@@ -337,6 +358,96 @@
           "examples": [
             "CHARGING"
           ]
+        },
+        "bluetooth": {
+          "$id": "#/properties/settings/properties/bluetooth",
+          "type": "boolean",
+          "title": "Bluetooth-Enable Schema",
+          "description": "Enable/disable bluetooth",
+          "default": false
+        },
+        "bluetooth-device-name": {
+          "$id": "#/properties/settings/properties/bluetooth-device-name",
+          "type": "string",
+          "title": "Bluetooth-Device-Name Schema",
+          "description": "Bluetooth name of the device",
+          "examples": [
+            "MEMOR 10"
+          ]
+        },
+        "airplane-mode": {
+          "$id": "#/properties/settings/properties/airplane-mode",
+          "type": "boolean",
+          "title": "Airplane-Mode Schema",
+          "description": "Enable/disable airplane mode on the device",
+          "default": false
+        },
+        "location-services": {
+          "$id": "#/properties/settings/properties/location-services",
+          "type": "string",
+          "enum": [
+            "High accuracy",
+            "Battery saving",
+            "Sensors only",
+            "Off"
+          ],
+          "title": "Location-Services Schema",
+          "description": "Location services GPS (High accuracy, Battery saving, Sensors only, Off)",
+          "default": "High accuracy",
+          "examples": [
+            "Battery saving",
+            "Off"
+          ]
+        },
+        "screen-auto-rotate": {
+          "$id": "#/properties/settings/properties/screen-auto-rotate",
+          "type": "boolean",
+          "title": "Screen-Auto-Rotate Schema",
+          "description": "Enable/disable auto-rotation of device display"
+        },
+        "screen-default-orient": {
+          "$id": "#/properties/settings/properties/screen-default-orient",
+          "type": "string",
+          "enum": [
+            "Portrait (0 degrees)",
+            "Landscape (90 degrees)",
+            "Portrait (180 degrees)",
+            "Landscape (270 degrees)"
+          ],
+          "title": "Screen-Default-Orientation Schema",
+          "description": "Set the default orientation of device display",
+          "default": "Portrait (0 degrees)"
+        },
+        "screen-auto-brightness": {
+          "$id": "#/properties/settings/properties/screen-auto-brightness",
+          "type": "boolean",
+          "title": "Screen-Auto-Brightness Schema",
+          "description": "Enable/disable automatic screen brightness"
+        },
+        "screen-brightness-level": {
+          "$id": "#/properties/settings/properties/screen-brightness-level",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255,
+          "title": "Screen-Brightness-Level Schema",
+          "description": "Set screen brightness level (0-255)",
+          "examples": [
+            0,
+            121,
+            200
+          ]
+        },
+        "mobile-data": {
+          "$id": "#/properties/settings/properties/mobile-data",
+          "type": "boolean",
+          "title": "Mobile-Data Schema",
+          "description": "Enable/disable mobile data services"
+        },
+        "data-roaming": {
+          "$id": "#/properties/settings/properties/mobile-data-roaming",
+          "type": "boolean",
+          "title": "Data-Roaming Schema",
+          "description": "Enable/disable mobile data roaming"
         }
       }
     },
@@ -594,10 +705,21 @@
       },
       "if": {
         "properties": {
-          "mode": { "enum": [ "wpa-psk", "wpa2-psk", "wep-40", "wep-104" ] }
+          "mode": {
+            "enum": [
+              "wpa-psk",
+              "wpa2-psk",
+              "wep-40",
+              "wep-104"
+            ]
+          }
         }
       },
-      "then": { "required": [ "mode-key" ] }
+      "then": {
+        "required": [
+          "mode-key"
+        ]
+      }
     },
     "deployment": {
       "$id": "#/properties/deployment",
@@ -726,6 +848,114 @@
             "examples": [
               "fd09B1iL/k4jRWrjrP0/sO44teY+B3UafBLsMsCEqd1KOv6b6JYBXLVv70FmHdZhIVoEOQvHu7O4PUJStpZQ+4PYjPqCO+NQr81M7GOF421Ke8L2u4EYyqDE5qXfLy2shEgaRwRpr2f35/38WZkh6edyiWZQJjyLeZcuI7WiaJPpw7Jcw7ye7mb7Rl+ePNFmfvUrpeRFtN+5kUsx/SbB1v0gDyOOuoep"
             ]
+          }
+        }
+      }
+    },
+    "vpn": {
+      "$id": "#/properties/vpn",
+      "type": "array",
+      "title": "VPN array Schema",
+      "description": "Section used to specify VPN settings. Supports multiple VPNs",
+      "items": {
+        "$id": "#/properties/vpn/items",
+        "type": "object",
+        "title": "VPN Schema",
+        "required": [
+          "name",
+          "password",
+          "vpn-type",
+          "server-address"
+        ],
+        "properties": {
+          "name": {
+            "$id": "#/properties/vpn/items/name",
+            "type": "string",
+            "title": "VPN-Name Schema",
+            "description": "Name of the VPN"
+          },
+          "vpn-type": {
+            "$id": "#/properties/vpn/items/vpn-type",
+            "type": "string",
+            "title": "VPN-Type Schema",
+            "description": "Select VPN type",
+            "enum": [
+              "PTTP",
+              "L2TP/IPSec PSK",
+              "L2TP/IPSec RSA",
+              "IPSec Xauth PSK",
+              "IPSec Xauth RSA",
+              "IPSec Hybrid RSA"
+            ]
+          },
+          "server-address": {
+            "$id": "#/properties/vpn/items/server-address",
+            "type": "string",
+            "title": "VPN-Server-Address-Schema",
+            "description": "Address of the vpn server to use"
+          },
+          "username": {
+            "$id": "#/properties/vpn/items/username",
+            "type": "string",
+            "title": "VPN-Username Schema",
+            "description": "Username for the VPN"
+          },
+          "password": {
+            "$id": "#/properties/vpn/items/password",
+            "type": "string",
+            "title": "VPN-Password Schema",
+            "description": "Password for the VPN"
+          },
+          "dns-search-domains": {
+            "$id": "#/properties/vpn/items/dns-search-domains",
+            "type": "string"
+          },
+          "dns-servers": {
+            "$id": "#/properties/vpn/items/dns-servers",
+            "type": "string",
+            "title": "VPN-DNS-Server-Schema",
+            "examples": [
+              "8.8.8.8"
+            ]
+          },
+          "forwarding-routes": {
+            "$id": "#/properties/vpn/items/forwarding-routes",
+            "title": "VPN-Forwarding-Routes Schema",
+            "examples": ["10.0.0.0/8"]
+          },
+          "ppp-encryption": {
+            "$id": "#/properties/vpn/items/ppp-encryption",
+            "type": "boolean"
+          },
+          "lt2p-secret": {
+            "$id": "#/properties/vpn/items/lt2p-secret",
+            "type": "string"
+          },
+          "ipsec-identifier": {
+            "$id": "#/properties/vpn/items/ipsec-identifier",
+            "type": "string"
+          },
+          "ipsec-pre-shared-key": {
+            "$id": "#/properties/vpn/items/ipsec-pre-shared-key",
+            "type": "string"
+          },
+          "user-cert": {
+            "$id": "#/properties/vpn/items/user-cert",
+            "type": "string"
+          },
+          "ca-cert": {
+            "$id": "#/properties/vpn/items/ca-cert",
+            "type": "string"
+          },
+          "server-cert": {
+            "$id": "#/properties/vpn/items/server-cert",
+            "type": "string"
+          },
+          "save-account-info": {
+            "$id": "#/properties/vpn/items/save-account-info",
+            "type": "boolean",
+            "title": "VPN-Save-Account-Info",
+            "description": "Save the account information for this VPN?"
           }
         }
       }
