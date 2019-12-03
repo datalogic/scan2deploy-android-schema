@@ -153,7 +153,7 @@ The `settings` sections can be used to controls some inner device settings, that
 * `auto-time`: (optional) Boolean value controlling the *Date & Time* automatic date-time adjustment setting. The default (Android) value is `true`.
 * `auto-time-zone`: (optional) Boolean value controlling the *Date & Time* automatic time-zone adjustment setting. The default (Android) value is `true`.
 * `auto-time-server`: (optional) Address of the NTP server to be used for date-time synchronization. Please note that the timezone won't possibly be synched due to lack of a GPS unit in the device. If the server is set a device reboot is suggested for the new setting to be spread system-wide.  The default value is `null`, which leave the default NTP is used (i.e. `asia.pool.ntp.org`).
-* `debug-bridge`: (optional) Boolean value controlling the state of *Android Debug Bridge*. The default (Android) value is `true`.
+* `debug-bridge`: (optional) Boolean value controlling the state of *Android Debug Bridge*. The default (Android) value is `false`.
 * `lock-screen`: (optional) Boolean value controlling the state of Android's lock-screen, requiring the user to swipe the display to unlock the device. The default (Android) value is `true`.
 * `status-bar`: (optional) Boolean value controlling the (top) display status-bar. By hiding the status-bar notifications will disappear, too. The default (Android) value is `true`.
 * `navigation-bar`: (optional) Boolean value controlling the (bottom) display navigation-bar. The default (Android) value is `true`.
@@ -161,7 +161,7 @@ The `settings` sections can be used to controls some inner device settings, that
 * `usb-profile`: (optional) USB communication profile in use. Available values are `NONE`, `BOTH`, `DATA`, and `CHARGE`. The default (Android) value is `BOTH`.
 * `usb-function`: (optional) USB communication function in use. Available values are `MTP`, `PTP`, and `CHARGING`. The default (Android) value is `CHARGING`.
 * `bluetooth`: (optional) Boolean value that sets bluetooth to be enabled or disabled. The default (Android) is `false`.
-* `bluetooth-device-name`: (optional)  Bluetooth display name for the device. Bluetooth must be enabled to change the device name. This setting will temporarily enable bluetooth (if necessary) to accomplish this.
+* `bluetooth-device-name`: (optional)  Bluetooth display name for the device. Bluetooth must be enabled to change the device name. This setting will temporarily enable bluetooth (if necessary) to accomplish this. The default (Android) value is `""`.
 * `airplane-mode`: (optional) When enabled, turns off device radios: Wi-Fi, Bluetooth, NFC. The default (Android) value is `false`.
 * `screen-auto-rotate`: (optional) When enabled, allows the device display to change from portrait
   to landscape and vice versa as needed depending on device orientation. The default (Android) is `false`.
@@ -170,14 +170,14 @@ The `settings` sections can be used to controls some inner device settings, that
 * `screen brightness level`: (optional) Set the screen brightness level on a scale from 0 - 255, with 255 being max brightness.
                                 Setting this disables screen-auto-brightness. The default (Android) value is `128`.
 * `select-time-zone`: (optional) Set the device's time zone. 591 possible valid time zones.
-* `time-24-format`: (optional) Set the clock time format to display in 24 hour time (military time).
-* `usb-debugging`: (optional) Boolean value that sets USB Debugging to be enabled or disabled.
+* `time-24-format`: (optional) Set the clock time format to display in 24 hour time (military time). The default (Android) value is `false`.
+
 
 ### Network
 
 The `network` sections is used to configure the device Wi-Fi network. The available parameters are the following
 
-* `essid`: (optional) The wireless network ESSID. The default value is `tsunami`.
+* `essid`: (optional) The wireless network ESSID. The default value is `""`.
 * `hidden`: (optional) Boolean value indicating whether the wireless network is using a hidden ESSID. The default value is `false`.
 * `mode`: (optional) The wireless connection mode. Supported values are `open`, `wep-40`, `wep-104`, `wpa-psk`, `wpa2-psk`, `wpa-eap`, and `wpa2-eap`. The default value is `open`.
 * `mode-key`: (optional) The wireless network key, if needed. The default value is the empty string (i.e. `""`).
