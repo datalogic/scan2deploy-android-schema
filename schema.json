@@ -212,7 +212,7 @@
             true
           ]
         },
-        "oemconfig" : {
+        "oemconfig": {
           "$id": "#/properties/global/properties/oemconfig",
           "type": "boolean",
           "title": "OEMConfig Schema",
@@ -868,7 +868,7 @@
           "$id": "#/properties/settings/properties/auto-time-server",
           "type": "string",
           "title": "Auto-Time-Server Schema",
-          "description": "Address of the NTP server to be used for date-time syncronization",
+          "description": "Address of the NTP server to be used for date-time synchronization",
           "default": "null",
           "examples": [
             "pool.ntp.org"
@@ -945,13 +945,13 @@
         "usb-function": {
           "$id": "#/properties/settings/properties/usb-function",
           "type": "string",
+          "title": "Usb-Function Schema",
+          "description": "USB communication function in use",
           "enum": [
             "MTP",
             "PTP",
             "CHARGING"
           ],
-          "title": "Usb-Function Schema",
-          "description": "USB communication function in use",
           "default": "CHARGING",
           "examples": [
             "CHARGING"
@@ -969,7 +969,7 @@
           "type": "string",
           "title": "Bluetooth-Device-Name Schema",
           "description": "Bluetooth name of the device",
-          "default": "tidal",
+          "default": "",
           "examples": [
             "MEMOR 10"
           ]
@@ -991,14 +991,14 @@
         "screen-default-orient": {
           "$id": "#/properties/settings/properties/screen-default-orient",
           "type": "string",
+          "title": "Screen-Default-Orientation Schema",
+          "description": "Set the default orientation of the display",
           "enum": [
             "Portrait (0 degrees)",
             "Landscape (90 degrees)",
             "Portrait (180 degrees)",
             "Landscape (270 degrees)"
           ],
-          "title": "Screen-Default-Orientation Schema",
-          "description": "Set the default orientation of the display",
           "default": "Portrait (0 degrees)"
         },
         "screen-auto-brightness": {
@@ -1011,10 +1011,10 @@
         "screen-brightness-level": {
           "$id": "#/properties/settings/properties/screen-brightness-level",
           "type": "integer",
-          "minimum": 0,
-          "maximum": 255,
           "title": "Screen-Brightness-Level Schema",
           "description": "Set the screen brightness level. Value must be between 0 and 255",
+          "minimum": 0,
+          "maximum": 255,
           "examples": [
             0,
             121,

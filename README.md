@@ -160,6 +160,18 @@ The `settings` sections can be used to controls some inner device settings, that
 * `charge-threshold`: (optional) Integer value in the range `0` to `100` indicating the charge threshold a battery exhausted device need to reach to automatically boot when recharging. The default value is `5`.
 * `usb-profile`: (optional) USB communication profile in use. Available values are `NONE`, `BOTH`, `DATA`, and `CHARGE`. The default (Android) value is `BOTH`.
 * `usb-function`: (optional) USB communication function in use. Available values are `MTP`, `PTP`, and `CHARGING`. The default (Android) value is `CHARGING`.
+* `bluetooth`: (optional) Boolean value that sets bluetooth to be enabled or disabled. The default (Android) is `false`.
+* `bluetooth-device-name`: (optional)  Bluetooth display name for the device. Bluetooth must be enabled to change the device name. This setting will temporarily enable bluetooth (if necessary) to accomplish this.
+* `airplane-mode`: (optional) When enabled, turns off device radios: Wi-Fi, Bluetooth, NFC. The default (Android) value is `false`.
+* `screen-auto-rotate`: (optional) When enabled, allows the device display to change from portrait
+  to landscape and vice versa as needed depending on device orientation. The default (Android) is `false`.
+* `screen-default-orient`: (optional) Set the default screen orientation for the device. Options are: Portrait (0 degrees),Landscape (90 degrees), Portrait (180 degrees),Landscape (270 degrees). Setting this disables screen-auto-rotate. The default (Android) value is `"Portrait (0 degrees)"`.
+* `screen-auto-brightness`: (optional) Enable display automatic brightness that adjusts to ambient light levels. The default (Android) value is `true`.
+* `screen brightness level`: (optional) Set the screen brightness level on a scale from 0 - 255, with 255 being max brightness.
+                                Setting this disables screen-auto-brightness. The default (Android) value is `128`.
+* `select-time-zone`: (optional) Set the device's time zone. 591 possible valid time zones.
+* `time-24-format`: (optional) Set the clock time format to display in 24 hour time (military time).
+* `usb-debugging`: (optional) Boolean value that sets USB Debugging to be enabled or disabled.
 
 ### Network
 
@@ -210,3 +222,9 @@ The `blobs` (optional) section is a JSON-array of objects. Each object *must* co
 The `file` attribute can be either absolute or relative (in this latter case, relative to the `global/target-path` parameter value). During the files de-serialization any required (parent) path is automatically created.
 
 In order to generate the base64 representation of a give binary file any suitable tool can be used (e.g. `base64` command-line program, or online services such as [HexEd.it](https://hexed.it) or [CyberChef](https://gchq.github.io/CyberChef/)).
+
+### Update Scan2Deploy
+
+The `update-scan2deploy` section contains just one field:
+
+* `update-version`, the desired version to self-update scan2deploy to.
