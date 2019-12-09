@@ -104,7 +104,7 @@
           "type": "string",
           "title": "Install-Path Schema",
           "description": "Folder where the application expects auto-installed/auto-updated APKs to be found. Default is value specified in 'target path'.",
-          "default": "/storage/emulated/0",
+          "default": "",
           "examples": [
             "/mnt/sdcard/airwatch"
           ]
@@ -114,7 +114,7 @@
           "type": "string",
           "title": "Update-Path Schema",
           "description": "Folder where the application expects auto-updated OTA packages to be found. Default is value specified in 'target path'.",
-          "default": "/storage/emulated/0",
+          "default": "",
           "examples": [
             "/mnt/sdcard/airwatch"
           ]
@@ -260,6 +260,8 @@
         "time-zone": {
           "$id": "#/properties/settings/properties/time-zone",
           "type": "string",
+          "title": "Select-Time-Zone Schema",
+          "description": "Specify a valid time zone for the device.",
           "enum": [
             "Africa/Abidjan",
             "Africa/Accra",
@@ -853,16 +855,7 @@
             "WET",
             "Zulu"
           ],
-          "title": "Select-Time-Zone Schema",
-          "description": "Specify a valid time zone for the device.",
           "default": "Europe/Sarajevo"
-        },
-        "time-24-format": {
-          "$id": "#/properties/settings/properties/time-format",
-          "type": "boolean",
-          "title": "Time-24-Format Schema",
-          "description": "Force time to display in 24-hour format",
-          "default": false
         },
         "auto-time-server": {
           "$id": "#/properties/settings/properties/auto-time-server",
@@ -956,71 +949,6 @@
           "examples": [
             "CHARGING"
           ]
-        },
-        "bluetooth": {
-          "$id": "#/properties/settings/properties/bluetooth",
-          "type": "boolean",
-          "title": "Bluetooth-Enable Schema",
-          "description": "Controls the state of the device's bluetooth radio",
-          "default": false
-        },
-        "bluetooth-device-name": {
-          "$id": "#/properties/settings/properties/bluetooth-device-name",
-          "type": "string",
-          "title": "Bluetooth-Device-Name Schema",
-          "description": "Bluetooth name of the device",
-          "default": "",
-          "examples": [
-            "MEMOR 10"
-          ]
-        },
-        "airplane-mode": {
-          "$id": "#/properties/settings/properties/airplane-mode",
-          "type": "boolean",
-          "title": "Airplane-Mode Schema",
-          "description": "Controls the airplane mode state, disabling all device radios",
-          "default": false
-        },
-        "screen-auto-rotate": {
-          "$id": "#/properties/settings/properties/screen-auto-rotate",
-          "type": "boolean",
-          "title": "Screen-Auto-Rotate Schema",
-          "description": "Controls the auto-rotation of device display, allowing display to change orientation dynamically",
-          "default": false
-        },
-        "screen-default-orient": {
-          "$id": "#/properties/settings/properties/screen-default-orient",
-          "type": "string",
-          "title": "Screen-Default-Orientation Schema",
-          "description": "Set the default orientation of the display",
-          "enum": [
-            "Portrait (0 degrees)",
-            "Landscape (90 degrees)",
-            "Portrait (180 degrees)",
-            "Landscape (270 degrees)"
-          ],
-          "default": "Portrait (0 degrees)"
-        },
-        "screen-auto-brightness": {
-          "$id": "#/properties/settings/properties/screen-auto-brightness",
-          "type": "boolean",
-          "title": "Screen-Auto-Brightness Schema",
-          "description": "Enable/disable automatic screen brightness",
-          "default": true
-        },
-        "screen-brightness-level": {
-          "$id": "#/properties/settings/properties/screen-brightness-level",
-          "type": "integer",
-          "title": "Screen-Brightness-Level Schema",
-          "description": "Set the screen brightness level. Value must be between 0 and 255",
-          "minimum": 0,
-          "maximum": 255,
-          "examples": [
-            0,
-            121,
-            200
-          ],
-          "default": 128
         }
       }
     },

@@ -160,18 +160,7 @@ The `settings` sections can be used to controls some inner device settings, that
 * `charge-threshold`: (optional) Integer value in the range `0` to `100` indicating the charge threshold a battery exhausted device need to reach to automatically boot when recharging. The default value is `5`.
 * `usb-profile`: (optional) USB communication profile in use. Available values are `NONE`, `BOTH`, `DATA`, and `CHARGE`. The default (Android) value is `BOTH`.
 * `usb-function`: (optional) USB communication function in use. Available values are `MTP`, `PTP`, and `CHARGING`. The default (Android) value is `CHARGING`.
-* `bluetooth`: (optional) Boolean value that sets bluetooth to be enabled or disabled. The default (Android) is `false`.
-* `bluetooth-device-name`: (optional)  Bluetooth display name for the device. Bluetooth must be enabled to change the device name. This setting will temporarily enable bluetooth (if necessary) to accomplish this. The default (Android) value is `""`.
-* `airplane-mode`: (optional) When enabled, turns off device radios: Wi-Fi, Bluetooth, NFC. The default (Android) value is `false`.
-* `screen-auto-rotate`: (optional) When enabled, allows the device display to change from portrait
-  to landscape and vice versa as needed depending on device orientation. The default (Android) is `false`.
-* `screen-default-orient`: (optional) Set the default screen orientation for the device. Options are: Portrait (0 degrees),Landscape (90 degrees), Portrait (180 degrees),Landscape (270 degrees). Setting this disables screen-auto-rotate. The default (Android) value is `"Portrait (0 degrees)"`.
-* `screen-auto-brightness`: (optional) Enable display automatic brightness that adjusts to ambient light levels. The default (Android) value is `true`.
-* `screen brightness level`: (optional) Set the screen brightness level on a scale from 0 - 255, with 255 being max brightness.
-                                Setting this disables screen-auto-brightness. The default (Android) value is `128`.
-* `select-time-zone`: (optional) Set the device's time zone. 591 possible valid time zones.
-* `time-24-format`: (optional) Set the clock time format to display in 24 hour time (military time). The default (Android) value is `false`.
-
+* `select-time-zone`: (optional) Set the device's time zone. 591 possible valid time zones. The default (Android) value is `Europe\Sarajevo`.
 
 ### Network
 
