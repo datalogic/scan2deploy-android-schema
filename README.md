@@ -160,7 +160,7 @@ The `settings` sections can be used to controls some inner device settings, that
 * `charge-threshold`: (optional) Integer value in the range `0` to `100` indicating the charge threshold a battery exhausted device need to reach to automatically boot when recharging. The default value is `5`.
 * `usb-profile`: (optional) USB communication profile in use. Available values are `NONE`, `BOTH`, `DATA`, and `CHARGE`. The default (Android) value is `BOTH`.
 * `usb-function`: (optional) USB communication function in use. Available values are `MTP`, `PTP`, and `CHARGING`. The default (Android) value is `CHARGING`.
-* `select-time-zone`: (optional) Set the device's time zone. 591 possible valid time zones. The default (Android) value is `Europe\Sarajevo`.
+* `time-zone`: (optional) Set the device's time zone. 591 possible valid time zones. The default (Android) value is `Europe\Sarajevo`.
 
 ### Network
 
