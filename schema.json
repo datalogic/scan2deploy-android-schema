@@ -94,7 +94,6 @@
           "type": "string",
           "title": "Target-Path Schema",
           "description": "Base destination folder where any archive/fill will be inflated/written. Default is device internal SD-card root",
-          "default": "",
           "examples": [
             "/mnt/sdcard/airwatch"
           ]
@@ -104,7 +103,6 @@
           "type": "string",
           "title": "Install-Path Schema",
           "description": "Folder where the application expects auto-installed/auto-updated APKs to be found. Default is value specified in 'target path'.",
-          "default": "",
           "examples": [
             "/mnt/sdcard/airwatch"
           ]
@@ -114,7 +112,6 @@
           "type": "string",
           "title": "Update-Path Schema",
           "description": "Folder where the application expects auto-updated OTA packages to be found. Default is value specified in 'target path'.",
-          "default": "",
           "examples": [
             "/mnt/sdcard/airwatch"
           ]

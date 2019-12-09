@@ -44,6 +44,7 @@ The `padlock` section is used to configure the staging locking feature. The avai
 * `purge-target-path`: (optional) Boolean value that drives the application behaviour with regards to the target path, that is whether a pre-existing target need to be *purged* (i.e. *deleted*) prior inflation of the deployment archive. The default value is `true` in order to ensure a cleanest-as-possibile deployment.
 * `auto-scan`: (optional) Boolean value that enables/disables the auto-installation and auto-update of APKs and OTA packages. The default value is `false`.
 * `downgrade-preinstalled`: (optional) Boolean value used to force the downgrade even of (system) pre-installed application, if required. The default value is `false`.
+* `oemconfig`: (optional) Boolean value that determines whether to broadcast an intent with OEMConfig settings. Default (Android) value is `false`.
 * `script`: (optional) Can be either a string specifying the absolute/relative path of a file, or a JSON array of strings describing the file content line-by-line. The script file will be interpreted and run at the very end of the staging process, after any setting/network/deployment has been completed. The default value is the empty string (i.e. `""`), disabling the script interpretation. The language structure is a simple one-statement-per-line sequence, executed in order. The supported commands are the following:
 
   **DELETE**
@@ -193,7 +194,7 @@ The `network` sections is used to configure the device Wi-Fi network. The availa
 The `deployment` section can be used to download a ZIP archive from a server and inflate it to the `target-path` folder. The available parameters are the following
 
 * `scheme`: (optional) The deployment download scheme to use. Can be either `http` or `https`. The default value is `http`.
-* `host`: (mandatory) The host-name or internet-protocol address of the server from which the resource is to be fetched.
+* `host`: (mandatory) The host-name or internet-protocol address of the server from which the resource is to be fetched. Default value is empty string `""`.
 * `port`: (optional) TCP/IP port to be used to contact the server. The default value is `80`.
 * `path`: (optional) Path to the server resource to download, complete with query-string if needed. The default value is the empty string (`""`).
 * `check-timeout`: (optional) The default value is `1000`.
@@ -216,4 +217,4 @@ In order to generate the base64 representation of a give binary file any suitabl
 
 The `update-scan2deploy` section contains just one field:
 
-* `update-version`, the desired version to self-update scan2deploy to.
+* `update-version`, the desired version to self-update scan2deploy to. The default (Android) value is `false`.
