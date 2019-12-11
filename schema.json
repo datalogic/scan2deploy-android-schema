@@ -2,7 +2,7 @@
   "definitions": {
     "base-path": {
       "type": "string",
-      "default": ""
+      "default": "/sdcard/Download"
     }
   },
   "$schema": "http://json-schema.org/draft-07/schema#",
