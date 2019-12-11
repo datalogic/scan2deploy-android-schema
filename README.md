@@ -38,9 +38,9 @@ The `padlock` section is used to configure the staging locking feature. The avai
 
 * `action`: (optional) Specifies the final action performed by the application at the very end of the staging process. This can be `none`, `close`, `enterprise-reset`, `factory-reset`, `reset`, or an `intent:`/`android-app://` URI. The default value is `none`.
 * `backup-to-enterprise`: (optional) Boolean flag that activates the enterprise backup persistence for the staging data. That means that both the staging script and archive are copied in the enterprise partition. Upon enterprise reset, the application will re-stage the device with such information. The default value is `false`.
-* `target-path`: (optional) This is the base destination folder where any archive/fill will be inflated/written. The default value is `""`;
-* `install-path`: (optional) Folder where the application expects auto-installed/auto-updated APKs are to be found. The default value is `""`.
-* `update-path`: (optional) Folder where the application expects auto-updated OTA packages are to be found. The default value is `""`.
+* `target-path`: (optional) This is the base destination folder where any archive/fill will be inflated/written. The default value is `"/sdcard/Download"`.
+* `install-path`: (optional) Folder where the application expects auto-installed/auto-updated APKs are to be found. The default value is same as `target-path` default.
+* `update-path`: (optional) Folder where the application expects auto-updated OTA packages are to be found. The default value is same as `target-path` default.
 * `purge-target-path`: (optional) Boolean value that drives the application behaviour with regards to the target path, that is whether a pre-existing target need to be *purged* (i.e. *deleted*) prior inflation of the deployment archive. The default value is `true` in order to ensure a cleanest-as-possibile deployment.
 * `auto-scan`: (optional) Boolean value that enables/disables the auto-installation and auto-update of APKs and OTA packages. The default value is `false`.
 * `downgrade-preinstalled`: (optional) Boolean value used to force the downgrade even of (system) pre-installed application, if required. The default value is `false`.
