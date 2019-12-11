@@ -194,7 +194,7 @@ The `network` sections is used to configure the device Wi-Fi network. The availa
 The `deployment` section can be used to download a ZIP archive from a server and inflate it to the `target-path` folder. The available parameters are the following
 
 * `scheme`: (optional) The deployment download scheme to use. Can be either `http` or `https`. The default value is `http`.
-* `host`: (mandatory) The host-name or internet-protocol address of the server from which the resource is to be fetched. Default value is empty string `""`.
+* `host`: (mandatory) The host-name or internet-protocol address of the server from which the resource is to be fetched. Default value is empty string `""`. Accepts either a string, or an array of strings.
 * `port`: (optional) TCP/IP port to be used to contact the server. The default value is `80`.
 * `path`: (optional) Path to the server resource to download, complete with query-string if needed. The default value is the empty string (`""`).
 * `check-timeout`: (optional) The default value is `1000`.
