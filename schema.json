@@ -99,7 +99,7 @@
           "$id": "#/properties/global/properties/target-path",
           "$ref": "#/definitions/base-path",
           "title": "Target-Path Schema",
-          "description": "Base destination folder where any archive/fill will be inflated/written. Default is device internal SD-card root",
+          "description": "Base destination folder where any archive/fill will be inflated/written.",
           "examples": [
             "/mnt/sdcard/airwatch"
           ]
