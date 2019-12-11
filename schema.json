@@ -1,4 +1,10 @@
 {
+  "definitions": {
+    "base-path": {
+      "type": "string",
+      "default": ""
+    }
+  },
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://example.com/root.json",
   "type": "object",
@@ -91,30 +97,27 @@
       "properties": {
         "target-path": {
           "$id": "#/properties/global/properties/target-path",
-          "type": "string",
+          "$ref": "#/definitions/base-path",
           "title": "Target-Path Schema",
-          "description": "Base destination folder where any archive/fill will be inflated/written.",
-          "default": "",
+          "description": "Base destination folder where any archive/fill will be inflated/written. Default is device internal SD-card root",
           "examples": [
             "/mnt/sdcard/airwatch"
           ]
         },
         "install-path": {
           "$id": "#/properties/global/properties/install-path",
-          "type": "string",
+          "$ref": "#/definitions/base-path",
           "title": "Install-Path Schema",
-          "description": "Folder where the application expects auto-installed/auto-updated APKs to be found.",
-          "default": "",
+          "description": "Folder where the application expects auto-installed/auto-updated APKs to be found. Default is same as 'target path' default.",
           "examples": [
             "/mnt/sdcard/airwatch"
           ]
         },
         "update-path": {
           "$id": "#/properties/global/properties/update-path",
-          "type": "string",
+          "$ref": "#/definitions/base-path",
           "title": "Update-Path Schema",
-          "description": "Folder where the application expects auto-updated OTA packages to be found.",
-          "default": "",
+          "description": "Folder where the application expects auto-updated OTA packages to be found. Default is same as 'target path' default.",
           "examples": [
             "/mnt/sdcard/airwatch"
           ]
