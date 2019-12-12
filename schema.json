@@ -1247,12 +1247,22 @@
         },
         "host": {
           "$id": "#/properties/deployment/properties/host",
-          "type": ["string", "array"],
+          "type": "string",
           "title": "Host Schema",
           "description": "Host-name or internet-protocol address of the server from which the resource is to be fetched",
           "default": "",
           "examples": [
-            "172.19.0.77", ["198.32.10.50", "230.5.22.34", "pcname.companyname.net"]
+            "172.19.0.77", "pcname.companyname.net"
+          ]
+        },
+        "alternate-hosts":{
+          "$id": "#/properties/deployment/properties/alternate-host",
+          "type": "array",
+          "title": "Alternate Hosts Schema",
+          "description": "Alternate host-names or internet-protocol addresses of the server from which the resource is to be fetched",
+          "default": [],
+          "examples": [
+            ["198.65.33.20", "pcname.companyname.net"]
           ]
         },
         "port": {
