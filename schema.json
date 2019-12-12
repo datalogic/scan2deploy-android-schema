@@ -1258,6 +1258,9 @@
         "alternate-hosts":{
           "$id": "#/properties/deployment/properties/alternate-host",
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "title": "Alternate Hosts Schema",
           "description": "Alternate host-names or internet-protocol addresses of the server from which the resource is to be fetched",
           "default": [],
