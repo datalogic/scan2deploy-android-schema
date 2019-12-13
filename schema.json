@@ -164,7 +164,7 @@
             "$id": "#/properties/global/properties/script/items",
             "type": "string",
             "title": "Items Schema",
-            "pattern": "^DELETE|^DISABLE_APP|^ENABLE_APP|^GRANT|^INFLATE|^INSTALL|^LAUNCH|^SHELL|^UNINSTALL|^UPDATE|^WAIT|^\\[Pre-Install\\]$|^\\[Install\\]$|^\\[Post-Install\\]$",
+            "pattern": "^BECOME|^BROADCAST|^CLEAR|^COPY|^DELETE|^DISABLE_APP|^DISOWN|^ENABLE_APP|^GRANT|^INFLATE|^INSTALL|^LAUNCH|^OWN|^SHELL|^START|^UNINSTALL|^UPDATE|^WAIT|^\\[Pre-Install\\]$|^\\[Install\\]$|^\\[Post-Install\\]$",
             "default": "DELETE <path> <pattern> <include>",
             "examples": [
               "DELETE <path> <pattern> <include>",
