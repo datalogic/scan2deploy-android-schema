@@ -194,11 +194,11 @@ The `network` sections is used to configure the device Wi-Fi network. The availa
 The `deployment` section can be used to download a ZIP archive from a server and inflate it to the `target-path` folder. The available parameters are the following
 
 * `scheme`: (optional) The deployment download scheme to use. Can be either `http` or `https`. The default value is `http`.
-* `host`: (mandatory) The host-name or internet-protocol address of the server from which the resource is to be fetched. Default value is empty string `""`. Accepts either a string, or an array of strings.
+* `host`: (mandatory) The host-name or internet-protocol address of the server from which the resource is to be fetched. Default value is empty string `""`.
 * `port`: (optional) TCP/IP port to be used to contact the server. The default value is `80`.
 * `path`: (optional) Path to the server resource to download, complete with query-string if needed. The default value is the empty string (`""`).
-* `check-timeout`: (optional) The default value is `1000`.
-* `fetch-timeout`: (optional) The default value is `60000`.
+* `check-timeout`: (optional) The timeout value (in milliseconds) used when attempting to reach the host server. The default value is `1000`.
+* `fetch-timeout`: (optional) The timeout value (in milliseconds) used when fetching resource from host. The default value is `60000`.
 * `skip-inflation`: (optional) Boolean value instructing the application *not* to inflate the deployment archive once downloaded. This can be useful to speed the OTA update process up. The default value is `false`.
 * `working-archive`: (optional) String representation of the local archive path-file name, once downloaded. The default value is `/mnt/sdcard/scan2deploy.archive`.
 

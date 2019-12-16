@@ -1294,7 +1294,7 @@
           "$id": "#/properties/deployment/properties/fetch-timeout",
           "type": "integer",
           "title": "Fetch-Timeout Schema",
-          "description": "The timeout value used when fetching resource from host",
+          "description": "The timeout value (in milliseconds) used when fetching resource from host",
           "default": 60000,
           "examples": [
             60000
@@ -1304,7 +1304,7 @@
           "$id": "#/properties/deployment/properties/check-timeout",
           "type": "integer",
           "title": "Check-Timeout Schema",
-          "description": "The timeout value used when attempting to reach the host server",
+          "description": "The timeout value (in milliseconds) used when attempting to reach the host server",
           "default": 1000,
           "examples": [
             1000
