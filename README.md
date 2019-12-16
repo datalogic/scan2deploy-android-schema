@@ -201,6 +201,7 @@ The `deployment` section can be used to download a ZIP archive from a server and
 * `fetch-timeout`: (optional) The timeout value (in milliseconds) used when fetching resource from host. The default value is `60000`.
 * `skip-inflation`: (optional) Boolean value instructing the application *not* to inflate the deployment archive once downloaded. This can be useful to speed the OTA update process up. The default value is `false`.
 * `working-archive`: (optional) String representation of the local archive path-file name, once downloaded. The default value is `/mnt/sdcard/scan2deploy.archive`.
+* `alternate-hosts`: (optional) Alternate host-names or internet-protocol addresses of the server from which the resource is to be fetched. Default value is `[]`.
 
 ### Blobs
 
