@@ -103,7 +103,7 @@
           "$id": "#/properties/global/properties/install-path",
           "type": "string",
           "title": "Install-Path Schema",
-          "description": "Folder where the application expects auto-installed/auto-updated APKs to be found. Default is same as 'target path' default.",
+          "description": "Folder where the application expects auto-installed/auto-updated APKs to be found.",
           "default" : "/sdcard/Download",
           "examples": [
             "/mnt/sdcard/airwatch"
@@ -113,7 +113,7 @@
           "$id": "#/properties/global/properties/update-path",
           "type": "string",
           "title": "Update-Path Schema",
-          "description": "Folder where the application expects auto-updated OTA packages to be found. Default is same as 'target path' default.",
+          "description": "Folder where the application expects auto-updated OTA packages to be found.",
           "default" : "/sdcard/Download",
           "examples": [
             "/mnt/sdcard/airwatch"
