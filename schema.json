@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "http://example.com/root.json",
     "type": "object",
-    "title": "Scan2Deploy Android Schema v1_4_0",
+    "title": "Scan2Deploy Android Schema v1_5_0",
     "description": "Schema to validate Android JSON files given as input to DL-Config to generate Scan2Deploy barcodes",
     "properties": {
       "layout": {
@@ -188,13 +188,7 @@
           "action": {
             "$id": "#/properties/global/properties/action",
             "type": "string",
-            "enum": [
-              "none",
-              "close",
-              "enterprise-reset",
-              "factory-reset",
-              "reset"
-            ],
+            "pattern": "^(?:intent:|android-app:\\/\\/).+$|none|close|enterprise-reset|factory-reset|reset",
             "title": "Action Schema",
             "description": "Specifies the final action performed by the application at the end of the staging process.",
             "default": "none",
