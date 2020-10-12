@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://example.com/root.json",
   "type": "object",
-  "title": "Scan2Deploy Android Schema v1_6_0",
+  "title": "Scan2Deploy Android Schema v1_7_0",
   "description": "Schema to validate Android JSON files given as input to DL-Config to generate Scan2Deploy barcodes",
   "properties": {
     "layout": {
@@ -1028,11 +1028,13 @@
             "wpa-psk",
             "wpa2-psk",
             "wpa-eap",
-            "wpa2-eap"
+            "wpa2-eap",
+            "owe",
+            "wpa3-sae",
+            "wpa3-eap-192"
           ],
           "title": "Mode Schema",
           "description": "Wireless connection mode",
-          "default": "open",
           "examples": [
             "wpa-psk"
           ]
@@ -1236,7 +1238,8 @@
               "wpa-psk",
               "wpa2-psk",
               "wep-40",
-              "wep-104"
+              "wep-104",
+              "wpa3-sae"
             ]
           }
         }
@@ -1245,7 +1248,11 @@
         "required": [
           "mode-key"
         ]
-      }
+      },
+      "required": [
+        "essid",
+        "mode"
+      ]
     },
     "deployment": {
       "$id": "#/properties/deployment",
@@ -1258,7 +1265,8 @@
           "type": "string",
           "enum": [
             "http",
-            "https"
+            "https",
+            "ftp"
           ],
           "title": "Scheme Schema",
           "description": "Deployment download scheme to use",
@@ -1307,6 +1315,26 @@
           ],
           "minimum": 0,
           "maximum": 65535
+        },
+        "ftp-username": {
+          "$id": "#/properties/deployment/properties/ftp-username",
+          "type": "string",
+          "title": "Ftp-Username Schema",
+          "description": "The username for the FTP server",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "ftp-password": {
+          "$id": "#/properties/deployment/properties/ftp-password",
+          "type": "string",
+          "title": "Ftp-Password Schema",
+          "description": "The password for the FTP server",
+          "default": "",
+          "examples": [
+            ""
+          ]
         },
         "path": {
           "$id": "#/properties/deployment/properties/path",
