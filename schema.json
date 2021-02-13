@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://example.com/root.json",
   "type": "object",
-  "title": "Scan2Deploy Android Schema v1_7_0",
+  "title": "Scan2Deploy Android Schema v1_10_0",
   "description": "Schema to validate Android JSON files given as input to DL-Config to generate Scan2Deploy barcodes",
   "properties": {
     "layout": {
@@ -156,12 +156,12 @@
             "array"
           ],
           "title": "Script Schema",
-          "description": "A script will be interpreted last in staging process. Provide either a string specifying the absolute/relative path of a file, or a JSON array of strings describing the file content line-by-line. \nDELETE <path> <pattern> <include>: Recursively deletes files/folders starting from path, only if the name matches the pattern regular-expression. If include is true the matching entries will be deleted, the non-matching otherwise. If folder path is empty at the end of the process it will be deleted, as well.\nDISABLE_APP <package-name>: Disables the app with the specified `package-name`. There is no longer any way an user could launch the app.\nENABLE_APP <package-name>: Enable the app with the specified `package-name`. The app becomes user-launchable.\nGRANT [-p permission] [-s grant|deny|default] <package-name>: Grants or revokes permissions on the specified package. The `-p` and `-s` parameters are optional.\n* `[-p]` If a permission is provided using the `-p` parameter, only that single permission will be affected. If no `-p` is specified, all the permissions declared in the manifest for the given `package-name` package will be affected.\n* `[-s]` The `-s` paramter can be used to specify that the permission be granted (`grant`), denied (`deny`), or user-configurable (`default`). In the caes of `grant` and `deny`, the permission set is no longer user-configurable; if you view the permission in the Settings app on the device, you will see that it can't be modified. The default behavior is to `grant` permission(s).\nINFLATE <archive-path> <target-path>: Inflates the ZIP archive found at archive-path to target-path folder.\nINSTALL <apk-path>: Installs an application given the path to the containing APK.\nLAUNCH <package-name>: Starts the launching intent given an application package-name. \nSHELL <command-with-arguments>: Runs an arbitrary shell command, similarly to the ADB shell command.\nUNINSTALL <package-name>: Uninstalls a previously installed application given its package-name.\nUPDATE <ota-path> <reset-type> <force-update>: Installs a firmware update from an OTA package.\nWAIT <milliseconds>: Suspend the script execution for milliseconds milliseconds.",
+          "description": "A script will be interpreted last in staging process. Provide either a string specifying the absolute/relative path of a file, or a JSON array of strings describing the file content line-by-line. \nDELETE <path> <pattern> <include>: Recursively deletes files/folders starting from path, only if the name matches the pattern regular-expression. If include is true the matching entries will be deleted, the non-matching otherwise. If folder path is empty at the end of the process it will be deleted, as well.\nDISABLE_APP <package-name>: Disables the app with the specified `package-name`. There is no longer any way an user could launch the app.\nENABLE_APP <package-name>: Enable the app with the specified `package-name`. The app becomes user-launchable.\nGRANT [-p permission] [-s grant|deny|default] <package-name>: Grants or revokes permissions on the specified package. The `-p` and `-s` parameters are optional.\n* `[-p]` If a permission is provided using the `-p` parameter, only that single permission will be affected. If no `-p` is specified, all the permissions declared in the manifest for the given `package-name` package will be affected.\n* `[-s]` The `-s` parameter can be used to specify that the permission be granted (`grant`), denied (`deny`), or user-configurable (`default`). In the case of `grant` and `deny`, the permission set is no longer user-configurable; if you view the permission in the Settings app on the device, you will see that it can't be modified. The default behavior is to `grant` permission(s).\nINFLATE <archive-path> <target-path>: Inflates the ZIP archive found at archive-path to target-path folder.\nINSTALL <apk-path>: Installs an application given the path to the containing APK.\nLAUNCH <package-name>: Starts the launching intent given an application package-name. \n'SET_SETTING <namespace> <setting> <value>: Set a system setting. namespace must be one of: GLOBAL, SECURE, or SYSTEM.\nSHELL <command-with-arguments>: Runs an arbitrary shell command, similarly to the ADB shell command.\nUNINSTALL <package-name>: Uninstalls a previously installed application given its package-name.\nUPDATE <ota-path> <reset-type> <force-update>: Installs a firmware update from an OTA package.\nWAIT <milliseconds>: Suspend the script execution for milliseconds milliseconds.",
           "items": {
             "$id": "#/properties/global/properties/script/items",
             "type": "string",
             "title": "Items Schema",
-            "pattern": "^BECOME|^BROADCAST|^CLEAR|^COPY|^DELETE|^DISABLE_APP|^DISOWN|^ENABLE_APP|^GRANT|^INFLATE|^INSTALL|^LAUNCH|^OWN|^SHELL|^START|^UNINSTALL|^UPDATE|^WAIT|^\\[Pre-Install\\]$|^\\[Install\\]$|^\\[Post-Install\\]$",
+            "pattern": "^BECOME|^BROADCAST|^CLEAR|^COPY|^DELETE|^DISABLE_APP|^DISOWN|^ENABLE_APP|^GRANT|^INFLATE|^INSTALL|^LAUNCH|^OWN|^SET_SETTING|^SHELL|^START|^UNINSTALL|^UPDATE|^WAIT|^\\[Pre-Install\\]$|^\\[Install\\]$|^\\[Post-Install\\]$",
             "default": "DELETE <path> <pattern> <include>",
             "examples": [
               "DELETE <path> <pattern> <include>",
@@ -171,6 +171,7 @@
               "INFLATE <archive-path> <target-path>",
               "INSTALL <apk-path>",
               "LAUNCH <package-name>",
+              "SET_SETTING <namespace> <setting> <value>",
               "SHELL <command-with-arguments>",
               "UNINSTALL <package-name>",
               "UPDATE <ota-path> <reset-type> <force-update>",
@@ -1361,7 +1362,7 @@
           "type": "integer",
           "title": "Check-Timeout Schema",
           "description": "The timeout value (in milliseconds) used when attempting to reach the host server",
-          "default": 1000,
+          "default": 3000,
           "examples": [
             1000
           ]
@@ -1385,11 +1386,24 @@
           "examples": [
             true
           ]
+        },
+        "storage-type": {
+          "$id": "#/properties/deployment/properties/storage-type",
+          "type": "string",
+          "enum": [
+            "none",
+            "internal-storage",
+            "removable-sdcard",
+            "usb-drive"
+          ],
+          "title": "Storage Type Schema",
+          "description": "Type of device storage used for local deployment",
+          "default": "none",
+          "examples": [
+            "removable-sdcard"
+          ]
         }
-      },
-      "required": [
-        "host"
-      ]
+      }
     },
     "blobs": {
       "$id": "#/properties/blobs",
