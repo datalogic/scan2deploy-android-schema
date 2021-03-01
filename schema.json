@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://example.com/root.json",
   "type": "object",
-  "title": "Scan2Deploy Android Schema v1_10_0",
+  "title": "Scan2Deploy Android Schema v1_11_0",
   "description": "Schema to validate Android JSON files given as input to DL-Config to generate Scan2Deploy barcodes",
   "properties": {
     "layout": {
@@ -161,7 +161,7 @@
             "$id": "#/properties/global/properties/script/items",
             "type": "string",
             "title": "Items Schema",
-            "pattern": "^BECOME|^BROADCAST|^CLEAR|^COPY|^DELETE|^DISABLE_APP|^DISOWN|^ENABLE_APP|^GRANT|^INFLATE|^INSTALL|^LAUNCH|^OWN|^SET_SETTING|^SHELL|^START|^UNINSTALL|^UPDATE|^WAIT|^\\[Pre-Install\\]$|^\\[Install\\]$|^\\[Post-Install\\]$",
+            "pattern": "^BECOME|^BROADCAST|^CLEAR|^COPY|^DELETE|^DISABLE_APP|^DISOWN|^ENABLE_APP|^GRANT|^INFLATE|^INSTALL|^LAUNCH|^OWN|^SET_SETTING|^BATTERY_OPTIMIZATION|^SHELL|^START|^UNINSTALL|^UPDATE|^WAIT|^\\[Pre-Install\\]$|^\\[Install\\]$|^\\[Post-Install\\]$",
             "default": "DELETE <path> <pattern> <include>",
             "examples": [
               "DELETE <path> <pattern> <include>",
@@ -172,6 +172,7 @@
               "INSTALL <apk-path>",
               "LAUNCH <package-name>",
               "SET_SETTING <namespace> <setting> <value>",
+              "BATTERY_OPTIMIZATION <ENABLE|DISABLE> <package-name>",
               "SHELL <command-with-arguments>",
               "UNINSTALL <package-name>",
               "UPDATE <ota-path> <reset-type> <force-update>",
@@ -994,266 +995,90 @@
       }
     },
     "network": {
-      "$id": "#/properties/network",
-      "type": "object",
-      "title": "Network Schema",
-      "description": "Section used to configure the device Wi-Fi network",
-      "properties": {
-        "essid": {
-          "$id": "#/properties/network/properties/essid",
-          "type": "string",
-          "title": "Essid Schema",
-          "description": "Wireless network ESSID",
-          "default": "",
-          "examples": [
-            "TESTTKIP"
-          ]
-        },
-        "hidden": {
-          "$id": "#/properties/network/properties/hidden",
-          "type": "boolean",
-          "title": "Hidden Schema",
-          "description": "Indicates if the wireless network is using a hidden ESSID",
-          "default": false,
-          "examples": [
-            false
-          ]
-        },
-        "mode": {
-          "$id": "#/properties/network/properties/mode",
-          "type": "string",
-          "enum": [
-            "open",
-            "wep-40",
-            "wep-104",
-            "wpa-psk",
-            "wpa2-psk",
-            "wpa-eap",
-            "wpa2-eap",
-            "owe",
-            "wpa3-sae",
-            "wpa3-eap-192"
-          ],
-          "title": "Mode Schema",
-          "description": "Wireless connection mode",
-          "examples": [
-            "wpa-psk"
-          ]
-        },
-        "mode-key": {
-          "$id": "#/properties/network/properties/mode-key",
-          "type": "string",
-          "title": "Mode-Key Schema",
-          "description": "Wireless network key, if needed",
-          "default": "",
-          "examples": [
-            "datalogic"
-          ]
-        },
-        "mode-key-encrypted": {
-          "$id": "#/properties/network/properties/mode-key-encrypted",
-          "type": "boolean",
-          "title": "Mode-Key-Encrypted Schema",
-          "description": "Indicates if 'mode-key' is written in plain-text or encrypted with a custom encryption algorithm",
-          "default": false,
-          "examples": [
-            false
-          ]
-        },
-        "eap-method": {
-          "$id": "#/properties/network/properties/eap-method",
-          "type": "string",
-          "enum": [
-            "none",
-            "peap",
-            "tls",
-            "ttls",
-            "pwd",
-            "sim",
-            "aka",
-            "aka-prime"
-          ],
-          "title": "Eap-Method Schema",
-          "description": "Configures the EAP authentication method",
-          "default": "none",
-          "examples": [
-            "none"
-          ]
-        },
-        "eap-phase2": {
-          "$id": "#/properties/network/properties/eap-phase2",
-          "type": "string",
-          "enum": [
-            "none",
-            "pap",
-            "mschap",
-            "mschapv2",
-            "gtc"
-          ],
-          "title": "Eap-Phase2 Schema",
-          "description": "Configures the EAP phase 2 authentication method",
-          "default": "none",
-          "examples": [
-            "none"
-          ]
-        },
-        "eap-identity": {
-          "$id": "#/properties/network/properties/eap-identity",
-          "type": "string",
-          "title": "Eap-Identity Schema",
-          "description": "Indicates the EAP identity",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "eap-anonymous-identity": {
-          "$id": "#/properties/network/properties/eap-anonymous-identity",
-          "type": "string",
-          "title": "Eap-Anonymous-Identity Schema",
-          "description": "Indicates the EAP anonymous identity, used as the unencrypted identity with certain EAP types",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "eap-password": {
-          "$id": "#/properties/network/properties/eap-password",
-          "type": "string",
-          "title": "Eap-Password Schema",
-          "description": "EAP password, if needed",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "eap-password-encrypted": {
-          "$id": "#/properties/network/properties/eap-password-encrypted",
-          "type": "boolean",
-          "title": "Eap-Password-Encrypted Schema",
-          "description": "Indicates if the 'eap-password' is encrypted with a custom encryption alogrithm",
-          "default": false,
-          "examples": [
-            false
-          ]
-        },
-        "eap-certificate": {
-          "$id": "#/properties/network/properties/eap-certificate",
-          "type": "string",
-          "title": "Eap-Certificate Schema",
-          "description": "Base64 representation of the EAP certificate to use",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "proxy-host": {
-          "$id": "#/properties/network/properties/proxy-host",
-          "type": "string",
-          "title": "Proxy-Host Schema",
-          "description": "Server name or IP address of the proxy to be used for HTTP/HTTPS communications",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "proxy-port": {
-          "$id": "#/properties/network/properties/proxy-port",
-          "type": "integer",
-          "title": "Proxy-Port Schema",
-          "description": "Server IP port of the proxy for HTTP/HTTPS communications",
-          "default": 0,
-          "examples": [
-            0
-          ],
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "purge": {
-          "$id": "#/properties/network/properties/purge",
-          "type": "boolean",
-          "title": "Purge Schema",
-          "description": "Indicates if any currently configured wireless network needs to be removed. Can be useful to avoid profile roaming.",
-          "default": true,
-          "examples": [
-            true
-          ]
-        },
-        "reconfigure": {
-          "$id": "#/properties/network/properties/reconfigure",
-          "type": "boolean",
-          "title": "Reconfigure Schema",
-          "description": "If true, will reconfigure any existing and matching network. If false, will leave existing network untouched. Setting used when 'purge' is set to false.",
-          "default": true,
-          "examples": [
-            false
-          ]
-        },
-        "sleep-policy": {
-          "$id": "#/properties/network/properties/sleep-policy",
-          "type": "integer",
-          "title": "Sleep-Policy Schema",
-          "description": "Wireless sleep policy for Android's Settings.Global parameter (0-WIFI_SLEEP_POLICY_DEFAULT, 1-WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED, 2-WIFI_SLEEP_POLICY_NEVER)",
-          "default": 2,
-          "examples": [
-            2
-          ],
-          "minimum": 0,
-          "maximum": 2
-        },
-        "save-to-file": {
-          "$id": "#/properties/network/properties/save-to-file",
-          "type": "string",
-          "title": "Save-To-File Schema",
-          "description": "Absolute path to the file where the current network configuration will be saved, empty string indicates network configuration won't be serialized to a file",
-          "default": "",
-          "examples": [
-            ""
-          ]
-        },
-        "ephemeral": {
-          "$id": "#/properties/network/properties/ephemeral",
-          "type": "boolean",
-          "title": "Ephemeral Schema",
-          "description": "If true, wireless connection profile will be used during staging process, then deleted after staging. If false, wireless connection profile will still be present after staging process.",
-          "default": false,
-          "examples": [
-            false
-          ]
-        },
-        "wait-for-connection": {
-          "$id": "#/properties/network/properties/wait-for-connection",
-          "type": "boolean",
-          "title": "Wait-For-Connection Schema",
-          "description": "Indicates whether a valid Wi-Fi connection has to be waited once the network configuration is complete. Can be useful when device needs to be configured but a valid Wi-Fi connection is not ready yet.",
-          "default": true,
-          "examples": [
-            true
-          ]
-        }
-      },
-      "if": {
-        "properties": {
-          "mode": {
-            "enum": [
-              "wpa-psk",
-              "wpa2-psk",
-              "wep-40",
-              "wep-104",
-              "wpa3-sae"
-            ]
+      "allOf": [
+        { "$ref": "#/definitions/basic-network" },
+        { "properties": {
+            "eap-password-encrypted": {
+              "$id": "#/definitions/network/properties/eap-password-encrypted",
+              "type": "boolean",
+              "title": "Eap-Password-Encrypted Schema",
+              "description": "Indicates if the 'eap-password' is encrypted with a custom encryption alogrithm",
+              "default": false,
+              "examples": [
+                false
+              ]
+            },
+            "ephemeral": {
+              "$id": "#/definitions/network/properties/ephemeral",
+              "type": "boolean",
+              "title": "Ephemeral Schema",
+              "description": "If true, wireless connection profile will be used during staging process, then deleted after staging. If false, wireless connection profile will still be present after staging process.",
+              "default": false,
+              "examples": [
+                false
+              ]
+            },
+            "mode-key-encrypted": {
+              "$id": "#/definitions/network/properties/mode-key-encrypted",
+              "type": "boolean",
+              "title": "Mode-Key-Encrypted Schema",
+              "description": "Indicates if 'mode-key' is written in plain-text or encrypted with a custom encryption algorithm",
+              "default": false,
+              "examples": [
+                false
+              ]
+            },
+            "purge": {
+              "$id": "#/definitions/network/properties/purge",
+              "type": "boolean",
+              "title": "Purge Schema",
+              "description": "Indicates if any currently configured wireless network needs to be removed. Can be useful to avoid profile roaming.",
+              "default": true,
+              "examples": [
+                true
+              ]
+            },
+            "save-to-file": {
+              "$id": "#/definitions/network/properties/save-to-file",
+              "type": "string",
+              "title": "Save-To-File Schema",
+              "description": "Absolute path to the file where the current network configuration will be saved, empty string indicates network configuration won't be serialized to a file",
+              "default": "",
+              "examples": [
+                ""
+              ]
+            },
+            "sleep-policy": {
+              "$id": "#/definitions/network/properties/sleep-policy",
+              "type": "integer",
+              "title": "Sleep-Policy Schema",
+              "description": "Wireless sleep policy for Android's Settings.Global parameter (0-WIFI_SLEEP_POLICY_DEFAULT, 1-WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED, 2-WIFI_SLEEP_POLICY_NEVER)",
+              "default": 2,
+              "examples": [
+                2
+              ],
+              "minimum": 0,
+              "maximum": 2
+            },
+            "wait-for-connection": {
+              "$id": "#/definitions/network/properties/wait-for-connection",
+              "type": "boolean",
+              "title": "Wait-For-Connection Schema",
+              "description": "Indicates whether a valid Wi-Fi connection has to be waited once the network configuration is complete. Can be useful when device needs to be configured but a valid Wi-Fi connection is not ready yet.",
+              "default": true,
+              "examples": [
+                true
+              ]
+            }
           }
         }
-      },
-      "then": {
-        "required": [
-          "mode-key"
-        ]
-      },
-      "required": [
-        "essid",
-        "mode"
       ]
+    },
+    "additional-networks": {
+      "type": "array",
+      "description": "Additional Wi-Fi networks to configure that are not required for staging",
+      "items": { "$ref": "#/definitions/basic-network" },
+      "default": []
     },
     "deployment": {
       "$id": "#/properties/deployment",
@@ -1455,6 +1280,198 @@
           "examples": []
         }
       }
+    }
+  },
+  "definitions":{
+    "basic-network": {
+      "$id": "#/definitions/basic-network",
+      "type": "object",
+      "title": "Network Schema",
+      "description": "Section used to configure the device Wi-Fi network",
+      "properties": {
+        "essid": {
+          "$id": "#/definitions/network/properties/essid",
+          "type": "string",
+          "title": "Essid Schema",
+          "description": "Wireless network ESSID",
+          "default": "",
+          "examples": [
+            "TESTTKIP"
+          ]
+        },
+        "hidden": {
+          "$id": "#/definitions/network/properties/hidden",
+          "type": "boolean",
+          "title": "Hidden Schema",
+          "description": "Indicates if the wireless network is using a hidden ESSID",
+          "default": false,
+          "examples": [
+            false
+          ]
+        },
+        "mode": {
+          "$id": "#/definitions/network/properties/mode",
+          "type": "string",
+          "enum": [
+            "open",
+            "wep-40",
+            "wep-104",
+            "wpa-psk",
+            "wpa2-psk",
+            "wpa-eap",
+            "wpa2-eap",
+            "owe",
+            "wpa3-sae",
+            "wpa3-eap-192"
+          ],
+          "title": "Mode Schema",
+          "description": "Wireless connection mode",
+          "examples": [
+            "wpa-psk"
+          ]
+        },
+        "mode-key": {
+          "$id": "#/definitions/network/properties/mode-key",
+          "type": "string",
+          "title": "Mode-Key Schema",
+          "description": "Wireless network key, if needed",
+          "default": "",
+          "examples": [
+            "datalogic"
+          ]
+        },
+        "eap-method": {
+          "$id": "#/definitions/network/properties/eap-method",
+          "type": "string",
+          "enum": [
+            "none",
+            "peap",
+            "tls",
+            "ttls",
+            "pwd",
+            "sim",
+            "aka",
+            "aka-prime"
+          ],
+          "title": "Eap-Method Schema",
+          "description": "Configures the EAP authentication method",
+          "default": "none",
+          "examples": [
+            "none"
+          ]
+        },
+        "eap-phase2": {
+          "$id": "#/definitions/network/properties/eap-phase2",
+          "type": "string",
+          "enum": [
+            "none",
+            "pap",
+            "mschap",
+            "mschapv2",
+            "gtc"
+          ],
+          "title": "Eap-Phase2 Schema",
+          "description": "Configures the EAP phase 2 authentication method",
+          "default": "none",
+          "examples": [
+            "none"
+          ]
+        },
+        "eap-identity": {
+          "$id": "#/definitions/network/properties/eap-identity",
+          "type": "string",
+          "title": "Eap-Identity Schema",
+          "description": "Indicates the EAP identity",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "eap-anonymous-identity": {
+          "$id": "#/definitions/network/properties/eap-anonymous-identity",
+          "type": "string",
+          "title": "Eap-Anonymous-Identity Schema",
+          "description": "Indicates the EAP anonymous identity, used as the unencrypted identity with certain EAP types",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "eap-password": {
+          "$id": "#/definitions/network/properties/eap-password",
+          "type": "string",
+          "title": "Eap-Password Schema",
+          "description": "EAP password, if needed",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "eap-certificate": {
+          "$id": "#/definitions/network/properties/eap-certificate",
+          "type": "string",
+          "title": "Eap-Certificate Schema",
+          "description": "Base64 representation of the EAP certificate to use",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "proxy-host": {
+          "$id": "#/definitions/network/properties/proxy-host",
+          "type": "string",
+          "title": "Proxy-Host Schema",
+          "description": "Server name or IP address of the proxy to be used for HTTP/HTTPS communications",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "proxy-port": {
+          "$id": "#/definitions/network/properties/proxy-port",
+          "type": "integer",
+          "title": "Proxy-Port Schema",
+          "description": "Server IP port of the proxy for HTTP/HTTPS communications",
+          "default": 0,
+          "examples": [
+            0
+          ],
+          "minimum": 0,
+          "maximum": 65535
+        },
+        "reconfigure": {
+          "$id": "#/definitions/network/properties/reconfigure",
+          "type": "boolean",
+          "title": "Reconfigure Schema",
+          "description": "If true, will reconfigure any existing and matching network. If false, will leave existing network untouched. Setting used when 'purge' is set to false.",
+          "default": true,
+          "examples": [
+            false
+          ]
+        }
+      },
+      "if": {
+        "properties": {
+          "mode": {
+            "enum": [
+              "wpa-psk",
+              "wpa2-psk",
+              "wep-40",
+              "wep-104",
+              "wpa3-sae"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "mode-key"
+        ]
+      },
+      "required": [
+        "essid",
+        "mode"
+      ]
     }
   }
 }
