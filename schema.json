@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://example.com/root.json",
   "type": "object",
-  "title": "Scan2Deploy Android Schema v1_11_0",
+  "title": "Scan2Deploy Android Schema v1_12_0",
   "description": "Schema to validate Android JSON files given as input to DL-Config to generate Scan2Deploy barcodes",
   "properties": {
     "layout": {
@@ -963,15 +963,17 @@
               ]
             },
             "type": {
-              "$id": "#/properties/settings/properties/default-home/properties/action",
+              "$id": "#/properties/settings/properties/default-home/properties/type",
               "type": "string",
               "enum": [
                 "custom-app",
-                "aosp-launcher-app"
+                "aosp-launcher-app",
+                "no_action",
+                "no_default"
               ],
               "title": "Home App Type",
               "description": "Home app type",
-              "default": "aosp-launcher-app",
+              "default": "no_action",
               "examples": [
                 "custom-app"
               ]
@@ -1415,6 +1417,40 @@
           "default": "",
           "examples": [
             ""
+          ]
+        },
+        "eap-user-certificate": {
+          "$id": "#/definitions/network/properties/eap-user-certificate",
+          "type": "string",
+          "title": "Eap-USer-Certificate Schema",
+          "description": "Base64 representation or keystore-alias of the EAP user certificate to use",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "eap-user-certificate-password": {
+          "$id": "#/definitions/network/properties/eap-user-certificate-password",
+          "type": "string",
+          "title": "Eap-USer-Certificate Password",
+          "description": "User certificate password",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "eap-user-certificate-type": {
+          "$id": "#/definitions/network/properties/eap-user-certificate-type",
+          "type": "string",
+          "enum": [
+            "base64",
+            "keystore-alias"
+          ],
+          "title": "Eap-User-Certificate Type",
+          "description": "Indicates whether the user-eap-certificate represented as base64 string or alias to a key that is already in the android keystore",
+          "default": "base64",
+          "examples": [
+            "base64"
           ]
         },
         "proxy-host": {
