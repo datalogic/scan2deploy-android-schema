@@ -2,8 +2,8 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "http://example.com/root.json",
   "type": "object",
-  "title": "Scan2Deploy Android Schema v1_12_0",
-  "description": "Schema to validate Android JSON files given as input to DL-Config to generate Scan2Deploy barcodes",
+  "title": "Scan2Deploy Android Schema v1_15_0",
+  "description": "Schema to validate Scan2Deploy Android JSON-based configuration files",
   "properties": {
     "layout": {
       "$id": "#/properties/layout",
@@ -161,7 +161,7 @@
             "$id": "#/properties/global/properties/script/items",
             "type": "string",
             "title": "Items Schema",
-            "pattern": "^BECOME|^BROADCAST|^CLEAR|^COPY|^DELETE|^DISABLE_APP|^DISOWN|^ENABLE_APP|^GRANT|^INFLATE|^INSTALL|^LAUNCH|^OWN|^SET_SETTING|^BATTERY_OPTIMIZATION|^SHELL|^START|^UNINSTALL|^UPDATE|^WAIT|^\\[Pre-Install\\]$|^\\[Install\\]$|^\\[Post-Install\\]$",
+            "pattern": "^BECOME|^BROADCAST|^CLEAR|^COPY|^DELETE|^DISABLE_APP|^DISOWN|^ENABLE_APP|^GRANT|^INFLATE|^INSTALL|^LAUNCH|^OWN|^SET_SETTING|^BATTERY_OPTIMIZATION|^SHELL|^START|^UNINSTALL|^UPDATE|^WAIT|^INSTALL_KEY_MAPPING|^\\[Pre-Install\\]$|^\\[Install\\]$|^\\[Post-Install\\]$",
             "default": "DELETE <path> <pattern> <include>",
             "examples": [
               "DELETE <path> <pattern> <include>",
@@ -177,6 +177,7 @@
               "UNINSTALL <package-name>",
               "UPDATE <ota-path> <reset-type> <force-update>",
               "WAIT <milliseconds>",
+              "INSTALL_KEY_MAPPING <file-path> [persistence-type]",
               "[Pre-Install]",
               "[Install]",
               "[Post-Install]"
@@ -1000,79 +1001,17 @@
       "allOf": [
         { "$ref": "#/definitions/basic-network" },
         { "properties": {
-            "eap-password-encrypted": {
-              "$id": "#/definitions/network/properties/eap-password-encrypted",
-              "type": "boolean",
-              "title": "Eap-Password-Encrypted Schema",
-              "description": "Indicates if the 'eap-password' is encrypted with a custom encryption alogrithm",
-              "default": false,
-              "examples": [
-                false
-              ]
-            },
-            "ephemeral": {
-              "$id": "#/definitions/network/properties/ephemeral",
-              "type": "boolean",
-              "title": "Ephemeral Schema",
-              "description": "If true, wireless connection profile will be used during staging process, then deleted after staging. If false, wireless connection profile will still be present after staging process.",
-              "default": false,
-              "examples": [
-                false
-              ]
-            },
-            "mode-key-encrypted": {
-              "$id": "#/definitions/network/properties/mode-key-encrypted",
-              "type": "boolean",
-              "title": "Mode-Key-Encrypted Schema",
-              "description": "Indicates if 'mode-key' is written in plain-text or encrypted with a custom encryption algorithm",
-              "default": false,
-              "examples": [
-                false
-              ]
-            },
-            "purge": {
-              "$id": "#/definitions/network/properties/purge",
-              "type": "boolean",
-              "title": "Purge Schema",
-              "description": "Indicates if any currently configured wireless network needs to be removed. Can be useful to avoid profile roaming.",
-              "default": true,
-              "examples": [
-                true
-              ]
-            },
-            "save-to-file": {
-              "$id": "#/definitions/network/properties/save-to-file",
-              "type": "string",
-              "title": "Save-To-File Schema",
-              "description": "Absolute path to the file where the current network configuration will be saved, empty string indicates network configuration won't be serialized to a file",
-              "default": "",
-              "examples": [
-                ""
-              ]
-            },
-            "sleep-policy": {
-              "$id": "#/definitions/network/properties/sleep-policy",
-              "type": "integer",
-              "title": "Sleep-Policy Schema",
-              "description": "Wireless sleep policy for Android's Settings.Global parameter (0-WIFI_SLEEP_POLICY_DEFAULT, 1-WIFI_SLEEP_POLICY_NEVER_WHILE_PLUGGED, 2-WIFI_SLEEP_POLICY_NEVER)",
-              "default": 2,
-              "examples": [
-                2
-              ],
-              "minimum": 0,
-              "maximum": 2
-            },
-            "wait-for-connection": {
-              "$id": "#/definitions/network/properties/wait-for-connection",
-              "type": "boolean",
-              "title": "Wait-For-Connection Schema",
-              "description": "Indicates whether a valid Wi-Fi connection has to be waited once the network configuration is complete. Can be useful when device needs to be configured but a valid Wi-Fi connection is not ready yet.",
-              "default": true,
-              "examples": [
-                true
-              ]
-            }
+          "purge": {
+            "$id": "#/definitions/network/properties/purge",
+            "type": "boolean",
+            "title": "Purge Schema",
+            "description": "Indicates if any currently configured wireless network needs to be removed. Can be useful to avoid profile roaming.",
+            "default": true,
+            "examples": [
+              true
+            ]
           }
+        }
         }
       ]
     },
@@ -1094,7 +1033,8 @@
           "enum": [
             "http",
             "https",
-            "ftp"
+            "ftp",
+            "sftp"
           ],
           "title": "Scheme Schema",
           "description": "Deployment download scheme to use",
@@ -1159,6 +1099,33 @@
           "type": "string",
           "title": "Ftp-Password Schema",
           "description": "The password for the FTP server",
+          "default": "",
+          "examples": [
+            ""
+          ]
+        },
+        "sftp-host-key-type": {
+          "$id": "#/properties/deployment/properties/sftp-host-key-type",
+          "type": "string",
+          "enum": [
+            "ssh-rsa",
+            "ssh-dss",
+            "ecdsa-sha2-nistp256",
+            "ecdsa-sha2-nistp384",
+            "ecdsa-sha2-nistp521"
+          ],
+          "title": "Sftp-Host-Key-Type Schema",
+          "description": "The host server's public key type",
+          "default": "",
+          "examples": [
+            "ssh-rsa"
+          ]
+        },
+        "sftp-host-key": {
+          "$id": "#/properties/deployment/properties/sftp-host-key",
+          "type": "string",
+          "title": "Sftp-Host-Key Schema",
+          "description": "The host server's public key",
           "default": "",
           "examples": [
             ""
@@ -1291,6 +1258,18 @@
       "title": "Network Schema",
       "description": "Section used to configure the device Wi-Fi network",
       "properties": {
+        "availability": {
+          "$id": "#/definitions/network/properties/availability",
+          "type": "string",
+          "enum": [
+            "staging",
+            "after-staging",
+            "always"
+          ],
+          "default": "always",
+          "title": "Network connection availability lifecycle",
+          "description": "Indicates the lifecycle(s) in which the network connection should be used for"
+        },
         "essid": {
           "$id": "#/definitions/network/properties/essid",
           "type": "string",
@@ -1475,14 +1454,69 @@
           "minimum": 0,
           "maximum": 65535
         },
+        "proxy-bypass-list": {
+          "$id": "#/definitions/network/properties/proxy-bypass-list",
+          "type": "string",
+          "pattern": "^$|^[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*(,[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*)*$",
+          "title": "Proxy Bypass Hosts List",
+          "description": "Comma separated list of hosts to exclude using the proxy on connections for. These hosts can use wildcards such as *.example.com.",
+          "default": "",
+          "examples": [
+            "*.example.com,mycomp.test.com"
+          ]
+        },
         "reconfigure": {
           "$id": "#/definitions/network/properties/reconfigure",
           "type": "boolean",
           "title": "Reconfigure Schema",
           "description": "If true, will reconfigure any existing and matching network. If false, will leave existing network untouched. Setting used when 'purge' is set to false.",
-          "default": true,
+          "default": true
+        },
+        "ip-address": {
+          "$id": "#/definitions/network/properties/ip-address",
+          "type": "string",
+          "title": "IP address",
+          "description": "IPv4 or IPv6 address to use for a manually configured IP network",
           "examples": [
-            false
+            "192.168.1.2", "10.0.0.2"
+          ]
+        },
+        "ip-prefix-length": {
+          "$id": "#/definitions/network/properties/ip-prefix-length",
+          "type": "integer",
+          "title": "IP Prefix length",
+          "description": "Static IPv4 Prefix length (CIDR routing prefix network number).",
+          "examples": [
+            16, 24
+          ],
+          "minimum": 1,
+          "maximum": 32
+        },
+        "ip-gateway": {
+          "$id": "#/definitions/network/properties/ip-gateway",
+          "type": "string",
+          "title": "Gateway IP address",
+          "description": "IPv4 or IPv6 address to use for a manually configured IP gateway",
+          "examples": [
+            "192.168.1.1", "10.0.0.1"
+          ]
+        },
+        "ip-dns1": {
+          "$id": "#/definitions/network/properties/ip-dns1",
+          "type": "string",
+          "title": "DNS1 IP address",
+          "description": "IPv4 or IPv6 address of the primary DNS server.",
+          "examples": [
+            "8.8.8.8"
+          ]
+        },
+        "ip-dns2": {
+          "$id": "#/definitions/network/properties/ip-dns2",
+          "type": "string",
+          "title": "DNS2 IP address",
+          "description": "IPv4 or IPv6 address of the secondary DNS server.",
+          "examples": [
+            "8.8.8.8"
           ]
         }
       },
